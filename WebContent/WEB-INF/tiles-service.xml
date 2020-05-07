@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+<!-- http://host:port/project명/help.home.tiles -->
+	<definition name="header" template="/tiles/header.jsp">
+<!-- 		<put-attribute name="title" value="도움말 홈" />
+		<put-attribute name="header" value="/tiles/template/header_help.jsp" />
+		<put-attribute name="menu" value="/tiles/template/menu_help.jsp" />
+		<put-attribute name="body" value="/tiles/help/help_home.jsp" />
+		<put-attribute name="footer" value="/tiles/template/footer_help.jsp" /> -->
+	</definition>
+	
+	<definition name="nav" template="/tiles/nav.jsp">
+<!-- 		<put-attribute name="title" value="도움말 홈" />
+		<put-attribute name="header" value="/tiles/template/header_help.jsp" />
+		<put-attribute name="menu" value="/tiles/template/menu_help.jsp" />
+		<put-attribute name="body" value="/tiles/help/help_home.jsp" />
+		<put-attribute name="footer" value="/tiles/template/footer_help.jsp" /> -->
+	</definition>
+	
+	<definition name="footer" template="/tiles/footer.jsp">
+<!-- 		<put-attribute name="title" value="도움말 홈" />
+		<put-attribute name="header" value="/tiles/template/header_help.jsp" />
+		<put-attribute name="menu" value="/tiles/template/menu_help.jsp" />
+		<put-attribute name="body" value="/tiles/help/help_home.jsp" />
+		<put-attribute name="footer" value="/tiles/template/footer_help.jsp" /> -->
+	</definition>
+	
+	<definition name="aside" template="/tiles/aside.jsp">
+	</definition>
+	
+	<definition name="aside1" template="/tiles/aside1.jsp">
+	</definition>
+	
+	<definition name="header1" template="/tiles/header1.jsp">
+	</definition>
+	
+	<definition name="main_header" template="/main/header.jsp">
+	</definition>
+	
+	<definition name="main_footer" template="/main/footer45.jsp">
+	</definition>
+	
+	
+</tiles-definitions>
