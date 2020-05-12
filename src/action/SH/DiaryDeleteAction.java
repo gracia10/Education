@@ -10,10 +10,6 @@ public class DiaryDeleteAction implements CommandAction{
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		request.setCharacterEncoding("utf-8");
-		
-		System.out.println("==================================================");
-		System.out.println("[���̾����Action]����");
 		
 		int d_num = Integer.parseInt(request.getParameter("d_num"));
 		
@@ -21,9 +17,7 @@ public class DiaryDeleteAction implements CommandAction{
 		int s_no = dbPro.getArticle(d_num).getS_no();
 		dbPro.deleteArticle(d_num);
 		
-		request.setAttribute("s_no", s_no);
-		
-		return "/Sunghee/Diary/diary_Pro.jsp";
+		return "/Education/Diary/diary_list.do?s_no="+s_no;
 	}
 
 }

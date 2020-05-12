@@ -26,8 +26,6 @@ public class Diary_CommentDBBean{
 	}
 
 	public Diary_CommentDataBean getComment(int dc_num) throws Exception{
-		System.out.println("코멘트 가져옵니다.");
-
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -58,8 +56,6 @@ public class Diary_CommentDBBean{
 	
 	
 	public List getComments(int d_num) throws Exception{
-		System.out.println("코멘트들가오져기 start"+d_num);
-
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -79,7 +75,6 @@ public class Diary_CommentDBBean{
 					comment.setD_num(rs.getInt("d_num"));
 					comment.setDc_num(rs.getInt("dc_num"));
 					comment.setDc_content(rs.getString("dc_content"));
-					System.out.println(rs.getString("dc_content"));
 					
 					comment.setDc_reg_date(rs.getTimestamp("dc_reg_date"));
 					comment.setCommenter(rs.getString("commenter"));
@@ -96,14 +91,11 @@ public class Diary_CommentDBBean{
 			jdbcUtil.close(pstmt);
 			jdbcUtil.close(conn);
 		}
-		System.out.println("완료");
 		return commentList;
 	}
     
     
     public String change_Name(String commenter) {
-    	System.out.println("commenter 체크 들어감"+commenter);
-    	
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -125,7 +117,7 @@ public class Diary_CommentDBBean{
 			if(rs.next()) {
 				real_name = rs.getString(1);
 			}else{
-				real_name = "(이름없음)";
+				real_name = "(占싱몌옙占쏙옙占쏙옙)";
 			}
 			
 		}catch(Exception ex) {
@@ -135,13 +127,10 @@ public class Diary_CommentDBBean{
 			jdbcUtil.close(pstmt);
 			jdbcUtil.close(conn);
 		}
-		System.out.println("[완료]리얼네임 ="+real_name);
     	return real_name;
     }
     
     public String insertComment(Diary_CommentDataBean comment) throws Exception{
-    	System.out.println("insertComment실행");
-    	
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String result="";
@@ -160,10 +149,8 @@ public class Diary_CommentDBBean{
 			x = pstmt.executeUpdate();
 
 			if(x==1) {
-				System.out.println("[축하]성공적으로 댓글 넣음!");
 				result = "success";
 			}else {
-				System.out.println("[실패]");
 				result = "false";
 			}
 		}catch(Exception ex) {
@@ -177,8 +164,6 @@ public class Diary_CommentDBBean{
 
 
     public String updateComment(Diary_CommentDataBean comment) throws Exception{
-    	System.out.println("updatecomment 실행");
-    	
     	Connection conn= null;
     	PreparedStatement pstmt = null;
     	String sql="";
@@ -195,7 +180,6 @@ public class Diary_CommentDBBean{
     		x = pstmt.executeUpdate();
     		
     		if(x == 1) {
-    			System.out.println("[성공]");
     			result = "success";
     		}
 		}catch(Exception ex) {
@@ -208,11 +192,9 @@ public class Diary_CommentDBBean{
     }
     
 	public String deleteComment(int dc_num) throws Exception{
-		System.out.println("코멘트 삭제 start!   "+dc_num);
-
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String result="";
+		String result="false";
 		int x = 0;
 		
 		
@@ -223,7 +205,6 @@ public class Diary_CommentDBBean{
 			x = pstmt.executeUpdate();
 			
 			if(x == 1) {
-				System.out.println("[성공]");
 				result = "success";
 			}
 			
@@ -237,7 +218,6 @@ public class Diary_CommentDBBean{
 	}
    
 	public int getD_num(int dc_num) throws Exception{
-		System.out.println("코멘트 삭제2 start!   "+dc_num);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -251,9 +231,6 @@ public class Diary_CommentDBBean{
 			
 			if(rs.next()) {
 				result = rs.getInt(1);
-				System.out.println("실행!"+result);
-			}else {
-				System.out.println("안실행");
 			}
 		}catch(Exception ex) {
 			ex.printStackTrace();

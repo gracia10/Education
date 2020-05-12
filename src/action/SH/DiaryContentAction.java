@@ -15,23 +15,17 @@ public class DiaryContentAction implements CommandAction{
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
-		request.setCharacterEncoding("utf-8");
+		int d_num = Integer.parseInt(request.getParameter("d_num"));
 		
-			System.out.println("==================================================");
-			System.out.println("[���̾������]����!");
+		DiaryDataBean article = DiaryDBBean.getInstance().getArticle(d_num);
 		
-			int d_num = Integer.parseInt(request.getParameter("d_num"));
-			
-			DiaryDataBean article = DiaryDBBean.getInstance().getArticle(d_num);
-			
-			// ��� ����Ʈ ��� 
-			List commentList = Diary_CommentDBBean.getInstance().getComments(d_num);
-			
-						
-			request.setAttribute("d_num", d_num);
-			request.setAttribute("article", article);
-			request.setAttribute("commentList", commentList);
-			
+		List commentList = Diary_CommentDBBean.getInstance().getComments(d_num);
+		
+					
+		request.setAttribute("d_num", d_num);
+		request.setAttribute("article", article);
+		request.setAttribute("commentList", commentList);
+		
 		return "/Sunghee/Diary/diary_content.jsp";
 	}
 

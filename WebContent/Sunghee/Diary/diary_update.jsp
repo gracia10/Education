@@ -47,17 +47,11 @@
 	        	data: data,
 	        	type: 'post',
 	        	url: '/Education/Sunghee/Diary/summernote_imageUpload.jsp',
+	        	dataType : "json",
 	        	cache: false,
 	        	contentType:false,
 	        	processData: false,
-	        	beforeSend:function(){
-	        		console.log("준비");
-	        	},
-	        	complete:function(){
-					console.log("완료");        		
-	        	},
 	        	success: function(data){
-	        		console.log("[성공]"+data.url);
 	        	 	$('#summernote').summernote('insertImage',data.url); 
 	        	},
 	        	error: function(jqXHR, textStatus, errorThrown) {
@@ -91,7 +85,6 @@
 	  	}
 	
 	  	function reset(){
-	  		alert("asd");
 	  		$('#summernote').text('${article.d_content}');
 	  	}
 	  	

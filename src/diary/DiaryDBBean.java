@@ -28,8 +28,6 @@ public class DiaryDBBean {
 	}
 	
 	public int insertArticle(DiaryDataBean article)throws Exception{
-		System.out.println("[디비빈시작]글을 등록합니다!");
-		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -49,10 +47,6 @@ public class DiaryDBBean {
 			
 			result = pstmt.executeUpdate();	
 			
-			if(result == 1) {
-				System.out.println("[성공]글이 등록되었습니다 짝짝");
-			}
-			
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}finally {
@@ -64,8 +58,6 @@ public class DiaryDBBean {
 	}
 	
 	public List getArticles(int d_yy,int d_mm,int s_no)throws Exception{
-		System.out.println("일지 목록을 가져옵니다. "+d_yy+"/"+d_mm+"/"+s_no);		
-
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -109,7 +101,6 @@ public class DiaryDBBean {
 	}
 	
     public DiaryDataBean getArticle(int d_num) throws Exception {
-		System.out.println("[getArticle실행]");
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -140,13 +131,10 @@ public class DiaryDBBean {
             if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
             if (conn != null) try { conn.close(); } catch(SQLException ex) {}
         }
-		System.out.println("[getArticle 완료!]"+article.getD_content());
         return article;
     }
 	
     public int updateArticle(DiaryDataBean article) throws Exception{
-    	System.out.println("[updateArticle실행]");
-		
     	Connection conn = null;
     	PreparedStatement pstmt = null;
     	String sql="";
@@ -164,12 +152,6 @@ public class DiaryDBBean {
 			pstmt.setInt(7, article.getS_no());
 			pstmt.setInt(8, article.getD_num());
 			result = pstmt.executeUpdate();
-			
-			if(result == 1) {
-				System.out.println("☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆[경축]성공적으로 업데이트 되었습니다!☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆");
-			}else {
-				System.out.println("ㅠㅠ실패");
-			}
 		} catch(Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -180,8 +162,6 @@ public class DiaryDBBean {
     }
     
 	public List getDate(int s_no)throws Exception{
-		System.out.println("[자바빈]학생의 일지 일자를 가져옵니다./"+s_no);		
-
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -208,14 +188,11 @@ public class DiaryDBBean {
 			jdbcUtil.close(pstmt);
 			jdbcUtil.close(conn);
 		}
-        System.out.println("결과"+dateList);
 		return dateList;
 	}
     
 	
     public int deleteArticle(int d_num) throws Exception{
-    	System.out.println("[updateArticle실행]");
-		
     	Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -225,11 +202,6 @@ public class DiaryDBBean {
 			pstmt = conn.prepareStatement("delete from diary where d_num=?");
 			pstmt.setInt(1,d_num);
 			result = pstmt.executeUpdate();
-			
-			if(result == 1) {
-				System.out.println("[성공]");
-			}
-			
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}finally {

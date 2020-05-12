@@ -109,9 +109,9 @@
 								<li><i class="fas fa-birthday-cake"></i> 생년월일 : ${student.s_birth}</li>
 								<li><i class="fas fa-phone"></i> 연락처&emsp; : ${user.u_tel}</li>
 								<li><i class="fas fa-home"></i> 주소&emsp;&emsp; : [${user.zipcode}]<br>${user.u_addr}</li>
-								<br>
 								<c:if test="${fn:contains(sessionScope.memId,'teacher')}">
-										<button class="btn btn-plus" onclick="document.location.href='/Education/Diary/dairy_write.do?s_no=${student.s_no}'">
+										<button class="btn btn-plus" 
+												onclick="document.location.href='/Education/Diary/dairy_write.do?s_no=${student.s_no}'">
 											<i class="fas fa-plus-circle" style="margin-bottom:3px"></i> 일지 작성
 										</button>
 								</c:if>

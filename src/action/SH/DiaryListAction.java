@@ -19,10 +19,6 @@ public class DiaryListAction implements CommandAction {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		request.setCharacterEncoding("utf-8");
-		
-		System.out.println("==================================================");
-		System.out.println("[다이어리 리스트 액션]실행!");
 		
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		int d_yy = LocalDate.now().getYear();
@@ -46,9 +42,6 @@ public class DiaryListAction implements CommandAction {
 		request.setAttribute("d_mm", d_mm);
 		request.setAttribute("t_name", t_name);
 		request.setAttribute("user", user);
-		
-		
-		System.out.println(">>전달"+articleList+":"+end_day+"/"+student);			
 		
 		return "/Sunghee/Diary/diary_list.jsp";
 	}

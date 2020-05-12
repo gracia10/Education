@@ -13,9 +13,6 @@ public class DiaryWriteProAction implements CommandAction {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-
-		request.setCharacterEncoding("utf-8");
-		
 		
 		  DiaryDataBean article = new DiaryDataBean();
 		  article.setD_yy(Integer.parseInt(request.getParameter("d_yy")));
@@ -29,8 +26,8 @@ public class DiaryWriteProAction implements CommandAction {
 		  DiaryDBBean dbPro = DiaryDBBean.getInstance();
 		  dbPro.insertArticle(article);
 		  
-		  request.setAttribute("s_no", article.getS_no());
+		  int s_no = article.getS_no();
 		
-		return "/Sunghee/Diary/diary_Pro.jsp";
+		return "/Education/Diary/diary_list.do?s_no="+s_no;
 	}
 }

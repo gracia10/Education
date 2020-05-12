@@ -51,7 +51,7 @@ public class UsersDBBean {
             	user.setU_grade(rs.getString("u_grade"));
             	
 	   	       	if(user.getU_addr() == null) {
-	   	       		user.setU_addr("�ּҹ̵��");
+	   	       		user.setU_addr("none");
 	   	       	}
             }            
         } catch(Exception ex) {

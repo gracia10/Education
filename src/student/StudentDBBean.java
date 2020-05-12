@@ -26,8 +26,6 @@ public class StudentDBBean {
 	}
 	
 	public StudentDataBean getStudent(int s_no) throws Exception{
-		System.out.println("getStudent start!"+s_no);
-		
 		StudentDataBean student = new StudentDataBean();
 		Connection conn = null;
 		PreparedStatement pstmt = null;

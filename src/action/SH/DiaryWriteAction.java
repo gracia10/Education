@@ -13,11 +13,6 @@ public class DiaryWriteAction implements CommandAction{
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
-		request.setCharacterEncoding("utf-8");
-		
-		System.out.println("==================================================");
-		System.out.println("[���̾���Action]����");
-		
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		
 		DiaryDBBean dbPro = DiaryDBBean.getInstance();

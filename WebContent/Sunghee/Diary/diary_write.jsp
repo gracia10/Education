@@ -51,11 +51,7 @@
 	        	cache: false,
 	        	contentType:false,
 	        	processData: false,
-	        	beforeSend:function(){
-	        		console.log("준비");
-	        	},
 	        	success: function(data){
-	        		console.log("::"+data.url);
 	        		$('#summernote').summernote('insertImage',data.url); 
 	        	},
 	        	error: function(jqXHR, textStatus, errorThrown) {
@@ -79,7 +75,6 @@
 	  		    	alert("해당 일자의 일지가 있습니다.");
 	  		    	return false;
 	  		    }
-	  	  		console.log("진행"+i+"/"+userinput.input_date.value+"/"+dateList[i]);
 	  		}
 	
 	  		var date = userinput.input_date.value;

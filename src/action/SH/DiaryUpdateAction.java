@@ -15,11 +15,6 @@ public class DiaryUpdateAction implements CommandAction{
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
-		request.setCharacterEncoding("utf-8");
-		
-		System.out.println("=====================================");
-		System.out.println("[���̾�����׼�::�ش� �Խñ� ������]");
-		
 		int d_num = Integer.parseInt(request.getParameter("d_num"));
 		
 		DiaryDataBean article = DiaryDBBean.getInstance().getArticle(d_num);

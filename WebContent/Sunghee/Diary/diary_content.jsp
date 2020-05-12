@@ -15,134 +15,6 @@
 	<!-- jquery -->
 	<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 	
-	<script>
-		/*페이지 로딩시 댓글 가져옴*/
-		$(function(){
-		    getCommentList();
-		});
-		
-		/* 댓글 불러오기 */
-		function getCommentList(){
-		    $.ajax({
-		        type:'GET',
-		        url : "<c:url value='/Diary/getcomments.do'/>",
-		        dataType : "json",
-		        data:{	"d_num": $("#d_num").val() },
-		        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-		        success : function(data){
-		       
-		            var html = "";
-		            var name = "";
-		            
-		            if(data.length > 0){
-		                for(i=0; i<data.length; i++){
-		                	
-		                	if(data[i].commenter.indexOf('teacher') > -1){ 
-		          				name = '담당선생님';
-		                	}else{ 
-		                		name = '학부모님'; 
-		                	}
-		                	
-		                    html += "<h6 class='mt-0 font-weight-bold'><strong>"+name+"</strong></h6>";
-		                    html += "<div id='update_com_"+data[i].dc_num+"'>";											/*update_com_(dc_num) :: 댓글 한 개의 모든영역  */
-		                    html += "<span id='output_com_"+data[i].dc_num+"'>"+data[i].dc_content+"</span><br>";		/*output_com_(dc_num) :: dc_content 부분만!*/
-		                    html += "<small>("+data[i].dc_reg_date+")";
-		                    if('${sessionScope.memId}'== data[i].commenter){ 
-			                    html += "&nbsp;&nbsp;<a href='javascript:;' id='comment_Edit_"+data[i].dc_num+"' onclick='update_form("+data[i].dc_num+")'>수정</a>";  /*댓글수정 */
-			                    html += "&nbsp;<a href='javascript:;' onclick='return del("+data[i].dc_num+")'>삭제</a>";
-		                	}
-		                    html += "</small>";
-		                    html += "</div>";
-		                    html += "<hr>";
-		                }
-		                
-		            } else {
-		                html += "<h5 class='mt-0'>Commenter Name</h5>";
-		                html += "등록된 댓글이 없습니다.";
-		                html += "<hr/>";
-		            }
-		            $("#commentList").html(html);
-		        },
-		        error:function(request,status,error){
-		        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		       	}
-		    });
-		}
-		
-		/* 새댓글에 태그 추가 */
-		function replace_com(){
-			var txtBox = document.getElementById("dc_content");
-			var lines = txtBox.value.split("\n");
-			
-			var resultString  = "<p>";
-			for (var i = 0; i < lines.length; i++) {
-			  	if(i == lines.length-1){
-			  		resultString += lines[i];
-			  	}else{
-			  		resultString += lines[i] + "<br>";			  		
-			  	}
-			}
-			 resultString +="</p>";
-			 txtBox.value = resultString;
-			comment_write();
-		}
-	
-		/*댓글 디비 추가*/
-		function comment_write(){
-		    $.ajax({
-		        type:'POST',
-		        url : "<c:url value='/Diary/dairy_commentwrite.do'/>",
-		        data:{	"d_num": $("#d_num").val(),
-						"dc_content": $("#dc_content").val()},
-		        success : function(data){
- 		                getCommentList(); 
-		                $("#dc_content").val("");
-		        },
-		        error:function(request,status,error){
-		        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		       }
-		        
-		    });
-		}
-		
-		/*댓글 삭제 의사*/
-		function del(dc_num){
-			if(confirm("삭제하시겠습니까")){
-				console.log("의사확인. 삭제시작");
-				comment_delete(dc_num);
-				
-			}else{
-				return false;
-			}
-		}
-		
-		/*댓글 디비 삭제*/
-		function comment_delete(dc_num){
-			console.log("디비삭제 에이젝스 시작합니다.");
-		    $.ajax({
-		        type:'POST',
-		        url : "<c:url value='/Diary/dairy_commentdelete.do'/>",
-		        data:{	"dc_num": dc_num },
-		        success : function(data){
-		        		getCommentList();
-		        },
-		        error:function(request,status,error){
-		        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		       }
-		        
-		    });
-		}
-		
-		/*글 삭제 의사*/
-		function del_article(){
-			if(confirm("삭제하시겠습니까")){
-				console.log("의사확인. 삭제시작");
-			}else{
-				return false;
-			}
-		}
-		
-	</script>
 	<style>
 		.btn-primary:hover {
 		    color: #fff;
@@ -224,74 +96,198 @@
 	</article>
 	
 	<script>
+	/*페이지 로딩시 댓글 가져옴*/
+	$(function(){
+	    getCommentList();
+	});
+	
+	/* 댓글 불러오기 */
+	function getCommentList(){
+	    $.ajax({
+	        type:'GET',
+	        url : "<c:url value='/Diary/getcomments.do'/>",
+	        data:{	"d_num": $("#d_num").val() },
+	        dataType: "json",
+	        success : function(data){
+	       
+	            var html = "";
+	            var name = "";
+	            
+	            if(data.length > 0){
+	                for(i=0; i<data.length; i++){
+	                	
+	                	if(data[i].commenter.indexOf('teacher') > -1){ 
+	          				name = '담당선생님';
+	                	}else{ 
+	                		name = '학부모님'; 
+	                	}
+	                	
+	                    html += "<h6 class='mt-0 font-weight-bold'><strong>"+name+"</strong></h6>";
+	                    html += "<div id='update_com_"+data[i].dc_num+"'>";									
+	                    html += "<span id='output_com_"+data[i].dc_num+"'>"+data[i].dc_content+"</span><br>";
+	                    html += "<small>("+data[i].dc_reg_date+")";
+	                    if('${sessionScope.memId}'== data[i].commenter){ 
+		                    html += "&nbsp;&nbsp;<a href='javascript:;' id='comment_Edit_"+data[i].dc_num
+		                    html += "' onclick='update_form("+data[i].dc_num+")'>수정</a>";
+		                    html += "&nbsp;<a href='javascript:;' onclick='return del("+data[i].dc_num+")'>삭제</a>";
+	                	}
+	                    html += "</small>";
+	                    html += "</div>";
+	                    html += "<hr>";
+	                }
+	                
+	            } else {
+	                html += "<h5 class='mt-0'>Commenter Name</h5>";
+	                html += "등록된 댓글이 없습니다.";
+	                html += "<hr/>";
+	            }
+	            $("#commentList").html(html);
+	        },
+	        error:function(request,status,error){
+	        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	       	}
+	    });
+	}
+	
+	/* 새댓글에 태그 추가 */
+	function replace_com(){
+		var txtBox = document.getElementById("dc_content");
+		var lines = txtBox.value.split("\n");
 		
-		/*댓글 수정 폼*/
-		function update_form(dc_num){
-			
-			console.log("업데이트폼 등장");
-			
-			var inner_html = document.getElementById('output_com_'+dc_num).innerHTML;		
-			var inner_txt = remove_tag(inner_html);
-			var txt_id = "dc_content_"+dc_num;
-			
-			var html = "";
-			
-				html += '<form id="updateForm">';
-				html += '<textarea class="form-control" name="dc_content" rows="3" id="'+txt_id+'">'+inner_txt+'</textarea><br>';
-				html += '<input type="hidden" name="dc_num" value='+dc_num+'>';
-				html += '<div align="right"><input type="button" value="등록" class="btn btn-primary" onclick="return replace_com2('+dc_num+')"></div>';
-				html += '</form>';
-				document.getElementById('update_com_'+dc_num).innerHTML = html;
+		var resultString  = "<p>";
+		for (var i = 0; i < lines.length; i++) {
+		  	if(i == lines.length-1){
+		  		resultString += lines[i];
+		  	}else{
+		  		resultString += lines[i] + "<br>";			  		
+		  	}
 		}
-		
-		/* 댓글수정시 <p>태그 제거 */
-		function remove_tag(com){
-			console.log("업데이트폼에 태그들 제거했어요");
-			
-			var re_com = com.replace(/<br>/gi,"\n");
-			re_com = re_com.replace("<p>","");
-			re_com = re_com.replace("</p>","");
-			return re_com;
+		 resultString +="</p>";
+		 txtBox.value = resultString;
+		comment_write();
+	}
+	
+	
+	/*글 삭제 의사*/
+	function del_article(){
+		return (confirm("삭제하시겠습니까")? true : false);
+	}
+	
+	</script>
+	<script>
+
+	/*댓글 디비 추가*/
+	function comment_write(){
+	    $.ajax({
+	        type:'POST',
+	        url : "<c:url value='/Diary/dairy_commentwrite.do'/>",
+	        data:{	"d_num": $("#d_num").val(),
+					"dc_content": $("#dc_content").val()},
+	        success : function(data){
+		        	if(data === "success"){
+			            getCommentList(); 
+		                $("#dc_content").val("");
+				    }else{
+						alert("정상적으로 처리되지 못했습니다. 잠시 후 이용해주세요.");
+					}
+	        },
+	        error:function(request,status,error){
+	        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	       }
+	        
+	    });
+	}
+	
+	/*댓글 삭제 의사*/
+	function del(dc_num){
+		if(confirm("삭제하시겠습니까")){
+			comment_delete(dc_num);
+		}else{
+			return false;
 		}
+	}
+	
+	/*댓글 디비 삭제*/
+	function comment_delete(dc_num){
+	    $.ajax({
+	        type:'POST',
+	        url : "<c:url value='/Diary/dairy_commentdelete.do'/>",
+	        data:{	"dc_num": dc_num },
+	        success : function(data){
+	        	if(data === "success"){
+		            getCommentList(); 
+			    }else{
+					alert("정상적으로 처리되지 못했습니다. 잠시 후 이용해주세요.");
+				}
+	        },
+	        error:function(request,status,error){
+	        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	       }
+	        
+	    });
+	}
+
+	/*댓글 수정 에이젝스*/
+	function comment_update(dc_num){
+	    $.ajax({
+	        type:'POST',
+	        url : "<c:url value='/Diary/dairy_commentupdate.do'/>",
+	        data:{	"dc_num": dc_num,
+					"dc_content": $("#dc_content_"+dc_num).val()},
+	        success : function(data){
+	        	if(data === "success"){
+		            getCommentList(); 
+			    }else{
+					alert("정상적으로 처리되지 못했습니다. 잠시 후 이용해주세요.");
+				}
+	        },
+	        error:function(request,status,error){
+	        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	       }
+	    });
+	}
 		
-		/* 댓글수정 등록시 태그추가 */
-		function replace_com2(dc_num){
-			console.log("업데이트폼 등록버튼을 누르셨네요. 실행합니다! 댓글번호는 "+dc_num);
-			
-			var txtBox = document.getElementById('dc_content_'+dc_num);
-			var lines = txtBox.value.split("\n");
-			
-			var resultString  = "<p>";
-			for (var i = 0; i < lines.length; i++) {
-				if(i == lines.length-1){
-			  		resultString += lines[i];
-			  	}else{
-			  		resultString += lines[i] + "<br>";			  		
-			  	}
-			}
-			 resultString +="</p>";
-			 txtBox.value = resultString;
-			 
-			 comment_update(dc_num);
+	/*댓글 수정 폼*/
+	function update_form(dc_num){
+		var inner_html = document.getElementById('output_com_'+dc_num).innerHTML;		
+		var txt_id = "dc_content_"+dc_num;
+		var inner_txt = remove_tag(inner_html);
+		
+		var html = '<form id="updateForm">';
+			html += '<textarea class="form-control" name="dc_content" rows="3" id="'+txt_id+'">';
+			html += inner_txt+'</textarea><br><input type="hidden" name="dc_num" value='+dc_num+'>';
+			html += '<div align="right"><input type="button" value="등록" class="btn btn-primary"'
+			html += ' onclick="return replace_com2('+dc_num+')"></div>''</form>';
+			document.getElementById('update_com_'+dc_num).innerHTML = html;
+	}
+	
+	/* 댓글수정시 <p>태그 제거 */
+	function remove_tag(com){
+		var re_com = com.replace(/<br>/gi,"\n");
+		re_com = re_com.replace("<p>","");
+		re_com = re_com.replace("</p>","");
+		return re_com;
+	}
+	
+	/* 댓글수정 등록시 태그추가 */
+	function replace_com2(dc_num){
+		var txtBox = document.getElementById('dc_content_'+dc_num);
+		var lines = txtBox.value.split("\n");
+		var resultString  = "<p>";
+		
+		for (var i = 0; i < lines.length; i++) {
+			if(i == lines.length-1){
+		  		resultString += lines[i];
+		  	}else{
+		  		resultString += lines[i] + "<br>";			  		
+		  	}
 		}
-		
-		
-		/*댓글 수정 에이젝스*/
-		function comment_update(dc_num){
-		    $.ajax({
-		        type:'POST',
-		        url : "<c:url value='/Diary/dairy_commentupdate.do'/>",
-		        data:{	"dc_num": dc_num,
-						"dc_content": $("#dc_content_"+dc_num).val()},
-		        success : function(data){
-		        		getCommentList();
-		        },
-		        error:function(request,status,error){
-		        	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		       }
-		    });
-		}
-		
+		 resultString +="</p>";
+		 txtBox.value = resultString;
+		 comment_update(dc_num);
+	}
+	
+	
 	</script>
 </body>
 </html>

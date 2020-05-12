@@ -12,8 +12,6 @@ public class WeeklyScheduleWriteAction implements CommandAction{
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws Throwable {
 		
-		request.setCharacterEncoding("utf-8");
-		
 		WeeklyScheduleDataBean ws = new WeeklyScheduleDataBean();
 			ws.setWs_day(request.getParameter("ws_day"));
 			ws.setSchedule(request.getParameter("schedule"));
@@ -23,9 +21,8 @@ public class WeeklyScheduleWriteAction implements CommandAction{
 		
 		WeeklyScheduleDBBean dbPro = WeeklyScheduleDBBean.getInstance();
 		dbPro.insertWeeklySchedule(ws);
-			
 		
-		return "/Sunghee/Teacher/t_mypagePro.jsp";
+		return "/Education/Teacher/teacher_Mypage.do";
 	}
 
 }
