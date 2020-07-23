@@ -46,7 +46,7 @@
 	      	$.ajax({
 	        	data: data,
 	        	type: 'post',
-	        	url: '/Education/Sunghee/Diary/summernote_imageUpload.jsp',
+	        	url: '<c:url value='/Diary/imageUpload.do'/>',
 	        	dataType : "json",
 	        	cache: false,
 	        	contentType:false,
