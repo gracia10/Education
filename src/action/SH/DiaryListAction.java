@@ -22,12 +22,10 @@ public class DiaryListAction implements CommandAction {
 		
 		int s_no = Integer.parseInt(request.getParameter("s_no"));
 		int d_yy = LocalDate.now().getYear();
-		int d_mm = LocalDate.now().getMonthValue();;
+		int d_mm = LocalDate.now().getMonthValue();
 		
-		if(request.getParameter("d_yy") != null) {
-			d_yy = Integer.parseInt(request.getParameter("d_yy"));
-			d_mm = Integer.parseInt(request.getParameter("d_mm"));
-		}
+		if(request.getParameter("d_yy") != null) d_yy = Integer.parseInt(request.getParameter("d_yy"));
+		if(request.getParameter("d_mm") != null) d_mm = Integer.parseInt(request.getParameter("d_mm"));
 		
 		StudentDataBean student = StudentDBBean.getInstance().getStudent(s_no);
 		List articleList = DiaryDBBean.getInstance().getArticles(d_yy,d_mm,s_no);
@@ -45,6 +43,4 @@ public class DiaryListAction implements CommandAction {
 		
 		return "/Sunghee/Diary/diary_list.jsp";
 	}
-
-	
 }

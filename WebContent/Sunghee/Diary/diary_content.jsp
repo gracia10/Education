@@ -257,7 +257,7 @@
 			html += '<textarea class="form-control" name="dc_content" rows="3" id="'+txt_id+'">';
 			html += inner_txt+'</textarea><br><input type="hidden" name="dc_num" value='+dc_num+'>';
 			html += '<div align="right"><input type="button" value="등록" class="btn btn-primary"'
-			html += ' onclick="return replace_com2('+dc_num+')"></div>''</form>';
+			html += ' onclick="return replace_com2('+dc_num+')"></div></form>';
 			document.getElementById('update_com_'+dc_num).innerHTML = html;
 	}
 	

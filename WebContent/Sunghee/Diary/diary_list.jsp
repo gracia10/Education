@@ -14,22 +14,6 @@
     <!-- Theme CSS --> 
 	<link id="theme-style" rel="stylesheet" href="/Education/Sunghee/plugins/layout/pillar-3.css">
 	
-	<script>
-		function check() {
-	
-			var when = eval("document.when");
-			if (!when.d_yy.value) {
-				alert("일자를 선택해주세요");
-				return false;
-			}
-	
-			if (!when.d_mm.value) {
-				alert("일자를 선택해주세요");
-				return false;
-			}
-			document.when.submit()
-		}
-	</script>
 	<style>
 	
 		.test:hover {
@@ -127,13 +111,13 @@
 				    	<h2 class="resume-section-title text-uppercase font-weight-bold pb-3 mb-3" >날짜 선택
 				    		<span style="color:black"><small>
 					    		<input type="hidden" name="s_no" value="${student.s_no}">
-					    		<select name="d_yy" onchange="check()" required>
-									<option selected value="${d_yy}" hidden>${d_yy}</option>
+					    		<select id="d_yy" name="d_yy">
+									<option selected value="${d_yy}" hidden >${d_yy}</option>
 									<c:forEach var="i" begin="0" end="${now_year-2005}">
 									<option value="${now_year-i}">${now_year-i}</option>
 									</c:forEach>
 								</select> 년 
-								<select name="d_mm" onchange="check()" required>
+								<select id="d_mm" name="d_mm">
 									<option selected value="${d_mm}" hidden>${d_mm}</option>
 									<c:forEach var="i" begin="1" end="12" step="1">
 										<option value="${i}">${i}</option>
@@ -191,5 +175,19 @@
 	</article>
 
 
+	<script>
+		window.onload = function(){
+			var d_yy = document.getElementById("d_yy");
+			var d_mm = document.getElementById("d_mm");	
+
+			function check() {
+				document.when.submit()
+			}
+			
+			d_yy.addEventListener('change',check);
+			d_mm.addEventListener('change',check);
+		
+		}
+	</script>
 </body>
 </html>

@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -93,8 +92,8 @@ public class ControllerUsingURI2 extends HttpServlet {
 				com = new NullAction();
 			}
 
-			view = com.requestPro(request, response);
 			response.setContentType("text/html; charset=UTF-8");
+			view = com.requestPro(request, response);
 
 			if (!view.equals("AjaxCall")) {
 				if(view.contains(".do")) {

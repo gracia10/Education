@@ -24,8 +24,7 @@ public class ImageUploadAction implements CommandAction {
 		String fileName = "";
 
 		try {
-			MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "UTF-8",
-					new DefaultFileRenamePolicy());
+			MultipartRequest multi = new MultipartRequest(request, uploadPath, size, "UTF-8", new DefaultFileRenamePolicy());
 			Enumeration files = multi.getFileNames();
 			String file = (String) files.nextElement();
 			fileName = multi.getFilesystemName(file);
