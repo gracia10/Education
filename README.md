@@ -5,7 +5,7 @@
 |환경 	 |   |
 |--------| :-------------------------------: |
 |O/S     | Window7, Window10 |
-|언어	 | Java/JSP/JavaScript/jQuery/Ajax|
+|언어	 | Java/JSP, JavaScript/jQuery|
 |DBMS    | Oracle|
 |Tools   | eclipse, sqldeveloper|
 
